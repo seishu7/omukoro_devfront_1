@@ -49,17 +49,6 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-      - name:  Copy artifact for deployment job
-        run: |
-          mkdir deploy
-          cp -r ./.next/standalone/. ./deploy
-          cp -r ./.next/static/. ./deploy -r
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: nextjs-build
-          path: ./deploy
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
