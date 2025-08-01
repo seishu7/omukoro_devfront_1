@@ -12,9 +12,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_SSL: ${{ secrets.DATABASE_SSL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
+      BCRYPT_ROUNDS: ${{ secrets.BCRYPT_ROUNDS }}
+      NODE_ENV: ${{ secrets.NODE_ENV }}
+      
     permissions:
       contents: read #This is required for actions/checkout
-
+      
     steps:
       - uses: actions/checkout@v4
 
