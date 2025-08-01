@@ -49,6 +49,22 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Next.jsビルドキャッシュの復元
+        uses: actions/cache@v3
+        with:
+          path: ./.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: 依存関係のインストール
+        run: npm ci
+
+      - name: ビルド実行
+        run: npm run build
+        env:
+          NODE_ENV: production
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
