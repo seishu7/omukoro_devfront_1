@@ -14,16 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
-    env:
-      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-      DATABASE_USER: ${{ secrets.DATABASE_USER }}
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-      DATABASE_SSL: ${{ secrets.DATABASE_SSL }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      BCRYPT_ROUNDS: ${{ secrets.BCRYPT_ROUNDS }}
-      NODE_ENV: 'production'  # 必要に応じて
+
     steps:
       - uses: actions/checkout@v4
 
@@ -61,4 +52,4 @@ jobs:
           app-name: 'aps-OMU-01'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C80AB0466C41428FADE12E97378E76D3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CA904367FC004ECAAE4D3F2BF86475F7 }}
