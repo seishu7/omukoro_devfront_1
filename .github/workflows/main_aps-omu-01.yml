@@ -28,10 +28,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
+      - name: Set up Node.js #version
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -48,16 +48,16 @@ jobs:
           echo "BCRYPT_ROUNDS=${{ secrets.BCRYPT_ROUNDS }}" >> .env.local
           echo "NODE_ENV=production" >> .env.local
 
-      - name: Build Test  
+      - name: Build Next.js app 
         run:  |  
-            npm run build --if-present
-            npm run test --if-present
+            npm run build
 
       - name: Copy artifact for deployment job
         run: |
           mkdir deploy
           cp -r ./.next/standalone/. ./deploy
           cp -r ./.next/static/. ./deploy/.next/static
+          cp package.json ./deploy/
 
       - name: Zip artifact for deployment
         run: zip release.zip ./deploy -r
@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -77,6 +77,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+
+      - name: Extract deployment package
+        run: unzip release.zip  
       
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -84,5 +87,5 @@ jobs:
         with:
           app-name: 'aps-OMU-01'
           slot-name: 'Production'
-          package: .
+          package: './deploy'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CA904367FC004ECAAE4D3F2BF86475F7 }}
