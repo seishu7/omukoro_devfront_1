@@ -62,7 +62,7 @@ jobs:
           cp -r ./.next/standalone/. ./deploy
           cp -r ./.next/static/. ./deploy/.next/static
           cp package.json ./deploy/
-          cp -r node_modules ./deploy/node_modules 
+          
 
       - name: Zip artifact for deployment
         run: zip release.zip ./deploy -r
