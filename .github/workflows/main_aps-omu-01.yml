@@ -36,6 +36,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Fix executable permissions on next binary
+        run: chmod +x ./node_modules/.bin/next
+
+
       - name: Create .env.local file
         run: |
           echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> .env.local
