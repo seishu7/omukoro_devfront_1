@@ -39,6 +39,8 @@ jobs:
       - name: Fix executable permissions on next binary
         run: chmod +x ./node_modules/.bin/next
 
+      - name: Check next binary in node_modules
+        run: ls -l node_modules/.bin/next
 
       - name: Create .env.local file
         run: |
@@ -88,7 +90,7 @@ jobs:
         run: unzip release.zip  
 
       - name: List files in release.zip
-        run: unzip -l release.zip  # zip内ファイル一覧を表示
+        run: unzip -l release.zip | grep '.bin/next' # zip内ファイル一覧を表示
 
       - name: Extract deployment package
         run: unzip -o release.zip  # zip解凍（-oで上書き）
