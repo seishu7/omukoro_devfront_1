@@ -52,4 +52,4 @@ jobs:
           app-name: 'aps-OMU-01'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D037978E0FD7461A8A496C3EB014D489 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C80AB0466C41428FADE12E97378E76D3 }}
